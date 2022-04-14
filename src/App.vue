@@ -19,5 +19,9 @@ export default {
 }
 body{
   margin: 0;
+  color: lightseagreen;
+}
+a {
+  text-decoration: none;
 }
 </style>
