@@ -5,37 +5,49 @@
     </div>
     <div class="row">
       <div class="create-account-form-colum">
-        <div class="create-account-form-text">
+        <div class="create-account-form-text" :class="haveErrorInput(userNameError)">
           Nome de usuario:
         </div>
-        <input v-model="userName" class="create-account-form-input" type="text">
+        <input v-model="userName" class="create-account-form-input" :class="haveErrorInputBorder(userNameError)" type="text">
+      </div>
+      <div v-if="userNameError" class="error-color" style="margin-top: 10px">
+        {{userNameError}}
       </div>
       <div class="create-account-form-colum create-account-form-second-colum">
-        <div class="create-account-form-text">
+        <div class="create-account-form-text" :class="haveErrorInput(emailError)">
           Email:
         </div>
-        <input v-model="email" class="create-account-form-input" type="text">
+        <input v-model="email" class="create-account-form-input" :class="haveErrorInputBorder(emailError)" type="text">
+      </div>
+      <div v-if="emailError" class="error-color" style="margin-top: 10px">
+        {{emailError}}
       </div>
     </div>
     <div class="row  create-account-form-second-line">
       <div class="create-account-form-colum">
-        <div class="create-account-form-text">
+        <div class="create-account-form-text" :class="haveErrorInput(passwordError)">
           Senha:
         </div>
-        <input v-model="password" class="create-account-form-input" type="text">
+        <input v-model="password" :class="haveErrorInputBorder(passwordError)" class="create-account-form-input" type="password">
+      </div>
+      <div v-if="passwordError" class="error-color" style="margin-top: 10px">
+        {{passwordError}}
       </div>
       <div class="create-account-form-colum create-account-form-second-colum">
-        <div class="create-account-form-text">
+        <div class="create-account-form-text" :class="haveErrorInput(confirmPasswordError)">
           Confirme a senha:
         </div>
-        <input v-model="secondPassword" class="create-account-form-input" type="text">
+        <input v-model="secondPassword" :class="haveErrorInputBorder(confirmPasswordError)" class="create-account-form-input" type="password">
+      </div>
+      <div v-if="confirmPasswordError" class="error-color" style="margin-top: 10px">
+        {{confirmPasswordError}}
       </div>
     </div>
     <div class="create-account-form-buttons-containear">
-      <div class="create-account-form-cancel-button">
+      <div v-on:click="sendHome()" class="create-account-form-cancel-button">
         Voltar.
       </div>
-      <div class="create-account-form-create-button">
+      <div v-on:click="createAccount()" class="create-account-form-create-button">
         Criar conta!
       </div>
     </div>
@@ -43,6 +55,7 @@
 </template>
 
 <script>
+import { useToast } from 'vue-toastification'
 export default {
   name: 'CreateAccount',
   data () {
@@ -50,7 +63,52 @@ export default {
       userName: '',
       email: '',
       password: '',
-      secondPassword: ''
+      secondPassword: '',
+      toast: useToast(),
+      userNameError: undefined,
+      emailError: undefined,
+      passwordError: undefined,
+      confirmPasswordError: undefined
+    }
+  },
+  methods: {
+    sendHome () {
+      this.$router.push('/')
+    },
+    haveErrorInput (input) {
+      if (input) return 'error-color'
+    },
+    haveErrorInputBorder (input) {
+      if (input) return 'error-border'
+    },
+    createAccount () {
+      if (this.password !== this.secondPassword) {
+        this.confirmPasswordError = 'As senhas estão diferentes'
+        return false
+      }
+      const axios = require('axios')
+      axios.post(this.$store.state.backEndUrl + 'account/', {
+        user: {
+          username: this.userName,
+          email: this.email,
+          password: this.password
+        },
+        tickets: 100
+      }).then(response => {
+        this.toast.success('Conta criada com sucesso!')
+        this.$store.commit('saveAccount', response.data)
+      }).catch(error => {
+        console.log(error.response)
+        if (error.response.data.user.username) {
+          this.userNameError = error.response.data.user.username[0]
+        }
+        if (error.response.data.user.password) {
+          this.passwordError = error.response.data.user.password[0]
+        }
+        if (error.response.data.user.email) {
+          this.emailError = error.response.data.user.email[0]
+        }
+      })
     }
   }
 }
@@ -60,7 +118,7 @@ export default {
   .create-account-title{
     text-align: center;
     font-size: 55px;
-    margin-top: 50px;
+    padding-top: 50px;
   }
   .row{
     display: flex;
@@ -97,6 +155,7 @@ export default {
     display: flex;
     justify-content: center;
     margin-top: 150px;
+    margin-bottom: 50px;
   }
   .create-account-form-cancel-button{
     border: 1px solid lightcoral;
@@ -143,6 +202,13 @@ export default {
     .create-account-form-buttons-containear{
       margin-top: 50px;
     }
+  }
+  .error-color{
+    color: lightcoral;
+  }
+  .error-border{
+    border: 1px solid lightcoral;
+    color: lightcoral;
   }
   @media only screen and (max-width: 1060px) {
     .create-account-form-create-button{

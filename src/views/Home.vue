@@ -24,9 +24,6 @@ export default {
 </script>
 
 <style scoped>
-  .home-page{
-    min-height: 93.2vh;
-  }
   .home-page-title{
     text-align: center;
     padding-top: 50px;
