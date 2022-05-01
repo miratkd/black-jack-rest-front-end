@@ -10,9 +10,9 @@
       <router-link to="/criar-conta" class="home-page-button">
         Criar uma conta.
       </router-link>
-      <div class="home-page-button">
+      <router-link to="/login" class="home-page-button">
         Ja tenho uma conta.
-      </div>
+      </router-link>
     </div>
   </div>
 </template>
