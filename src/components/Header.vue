@@ -1,7 +1,7 @@
 <template>
   <div class="header-containear">
     <div v-on:click="sendHome()" class="header-title">Black-Jack-Rest</div>
-    <div class="header-title">{{$store.state.account.user.username}}</div>
+    <div v-if="$store.state.account" class="header-title">{{$store.state.account.user.username}}</div>
   </div>
 </template>
 
@@ -12,9 +12,6 @@ export default {
     sendHome () {
       this.$router.push('/')
     }
-  },
-  mounted () {
-    console.log(this.$store.state.account.user.id)
   }
 }
 </script>
@@ -25,6 +22,7 @@ export default {
     align-items: center;
     background-color: lightseagreen;
     padding: 10px;
+    justify-content: space-between;
   }
   .header-title{
     font-size: 40px;

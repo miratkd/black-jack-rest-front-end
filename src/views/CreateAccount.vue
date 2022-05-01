@@ -86,6 +86,7 @@ export default {
         this.confirmPasswordError = 'As senhas estão diferentes'
         return false
       }
+      this.$store.commit('setIsLoading', true)
       const axios = require('axios')
       axios.post(this.$store.state.backEndUrl + 'account/', {
         user: {
@@ -97,8 +98,9 @@ export default {
       }).then(response => {
         this.toast.success('Conta criada com sucesso!')
         this.$store.commit('saveAccount', response.data)
+        this.$router.push('/eu')
+        this.$store.commit('setIsLoading', false)
       }).catch(error => {
-        console.log(error.response)
         if (error.response.data.user.username) {
           this.userNameError = error.response.data.user.username[0]
         }
@@ -108,6 +110,7 @@ export default {
         if (error.response.data.user.email) {
           this.emailError = error.response.data.user.email[0]
         }
+        this.$store.commit('setIsLoading', false)
       })
     }
   }

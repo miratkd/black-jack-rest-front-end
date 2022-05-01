@@ -4,17 +4,20 @@
     <router-view/>
   </div>
   <Footer/>
+  <Loader v-if="$store.state.isLoading"/>
 </template>
 
 <script>
 import Header from '@/components/Header.vue'
 import Footer from '@/components/Footer.vue'
+import Loader from '@/components/Loader.vue'
 export default {
-  components: { Header, Footer },
+  components: { Header, Footer, Loader },
   name: 'App',
   beforeMount () {
-    console.log('aqui')
     this.$store.commit('loadAccount')
+    this.$store.commit('setIsLoading', true)
+    setTimeout(() => { this.$store.commit('setIsLoading', false) }, 5000)
   }
 }
 </script>
