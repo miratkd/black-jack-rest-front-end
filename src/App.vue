@@ -16,8 +16,6 @@ export default {
   name: 'App',
   beforeMount () {
     this.$store.commit('loadAccount')
-    this.$store.commit('setIsLoading', true)
-    setTimeout(() => { this.$store.commit('setIsLoading', false) }, 5000)
   }
 }
 </script>

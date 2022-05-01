@@ -9,18 +9,18 @@
           Nome de usuario:
         </div>
         <input v-model="userName" class="create-account-form-input" :class="haveErrorInputBorder(userNameError)" type="text">
-      </div>
-      <div v-if="userNameError" class="error-color" style="margin-top: 10px">
-        {{userNameError}}
+        <div v-if="userNameError" class="error-color" style="margin-top: 10px">
+          {{userNameError}}
+        </div>
       </div>
       <div class="create-account-form-colum create-account-form-second-colum">
         <div class="create-account-form-text" :class="haveErrorInput(emailError)">
           Email:
         </div>
         <input v-model="email" class="create-account-form-input" :class="haveErrorInputBorder(emailError)" type="text">
-      </div>
-      <div v-if="emailError" class="error-color" style="margin-top: 10px">
-        {{emailError}}
+        <div v-if="emailError" class="error-color" style="margin-top: 10px">
+          {{emailError}}
+        </div>
       </div>
     </div>
     <div class="row  create-account-form-second-line">
@@ -29,18 +29,18 @@
           Senha:
         </div>
         <input v-model="password" :class="haveErrorInputBorder(passwordError)" class="create-account-form-input" type="password">
-      </div>
-      <div v-if="passwordError" class="error-color" style="margin-top: 10px">
-        {{passwordError}}
+        <div v-if="passwordError" class="error-color" style="margin-top: 10px">
+          {{passwordError}}
+        </div>
       </div>
       <div class="create-account-form-colum create-account-form-second-colum">
         <div class="create-account-form-text" :class="haveErrorInput(confirmPasswordError)">
           Confirme a senha:
         </div>
         <input v-model="secondPassword" :class="haveErrorInputBorder(confirmPasswordError)" class="create-account-form-input" type="password">
-      </div>
-      <div v-if="confirmPasswordError" class="error-color" style="margin-top: 10px">
-        {{confirmPasswordError}}
+        <div v-if="confirmPasswordError" class="error-color" style="margin-top: 10px">
+          {{confirmPasswordError}}
+        </div>
       </div>
     </div>
     <div class="create-account-form-buttons-containear">
