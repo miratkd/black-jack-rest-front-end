@@ -1,6 +1,7 @@
 <template>
   <div class="header-containear">
     <div v-on:click="sendHome()" class="header-title">Black-Jack-Rest</div>
+    <div v-if="$store.state.account" class="header-title">{{$store.state.account.user.username}}</div>
   </div>
 </template>
 
@@ -21,6 +22,7 @@ export default {
     align-items: center;
     background-color: lightseagreen;
     padding: 10px;
+    justify-content: space-between;
   }
   .header-title{
     font-size: 40px;
