@@ -19,7 +19,10 @@
 
 <script>
 export default {
-  name: 'Home'
+  name: 'Home',
+  mounted () {
+    if (this.$store.state.account) this.$router.push('/eu')
+  }
 }
 </script>
 

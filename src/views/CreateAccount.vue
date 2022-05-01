@@ -113,6 +113,9 @@ export default {
         this.$store.commit('setIsLoading', false)
       })
     }
+  },
+  mounted () {
+    if (this.$store.state.account) this.$router.push('/eu')
   }
 }
 </script>
