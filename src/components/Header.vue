@@ -1,7 +1,10 @@
 <template>
   <div class="header-containear">
     <div v-on:click="sendHome()" class="header-title">Black-Jack-Rest</div>
-    <div v-if="$store.state.account" class="header-title">{{$store.state.account.user.username}}</div>
+    <div v-if="$store.state.account" class="header-title-user header-title">
+      <span class="material-icons header-title-user-icon">account_circle</span>
+      <div>{{$store.state.account.user.username}}</div>
+    </div>
   </div>
 </template>
 
@@ -29,5 +32,13 @@ export default {
     font-weight: 700;
     color: white;
     cursor: pointer;
+  }
+  .header-title-user{
+    display: flex;
+    align-items: center;
+  }
+  .header-title-user-icon{
+    font-size: 40px;
+    margin-right: 30px;
   }
 </style>
