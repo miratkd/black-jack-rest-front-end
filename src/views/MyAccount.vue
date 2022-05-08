@@ -7,18 +7,32 @@
     </div>
     <div class="actions-section-containear">
       <div class="tickets-section-containear">
-        <div class="daily-ticket">Resgatar ticket diario!</div>
+        <div class="daily-ticket" v-on:click="() => dailyTicket = true">Resgatar ticket diario!</div>
       </div>
     </div>
+
+    <!-- Dialogs -->
+    <DailyTicketDialog v-if="dailyTicket" :closeDialog="closeDialog"/>
   </div>
 </template>
 
 <script>
+import DailyTicketDialog from '@/components/DailyTicket.vue'
 export default {
   name: 'MyAccount',
   data () {
     return {
-      account: undefined
+      account: undefined,
+      dailyTicket: false
+    }
+  },
+  components: {
+    DailyTicketDialog
+  },
+  methods: {
+    closeDialog () {
+      this.dailyTicket = false
+      this.$store.state.isLoading = false
     }
   },
   mounted () {
