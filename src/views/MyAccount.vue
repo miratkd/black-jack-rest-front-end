@@ -1,5 +1,5 @@
 <template>
-  <div class="page-containear">
+  <div class="page-containear" v-if="this.account">
     <div class="account-section-containear">
       <div class="account-section-line">{{this.$store.state.account.user.username}}</div>
       <div class="account-section-line">{{this.$store.state.account.user.email}}</div>
@@ -35,8 +35,9 @@ export default {
       this.$store.state.isLoading = false
     }
   },
-  mounted () {
-    this.account = this.$store.state.account
+  beforeMount () {
+    if (this.$store.state.account) this.account = this.$store.state.account
+    else this.$router.push('/')
   }
 }
 </script>
