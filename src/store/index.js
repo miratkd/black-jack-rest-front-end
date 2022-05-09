@@ -14,6 +14,10 @@ export default createStore({
       state.account = account
       localStorage.setItem('account', JSON.stringify(account))
     },
+    cleanAccount (state) {
+      state.account = undefined
+      localStorage.removeItem('account')
+    },
     loadAccount (state) { state.account = JSON.parse(localStorage.getItem('account')) },
     setIsLoading (state, value) { state.isLoading = value },
     setAccessToken (state, token) { state.accessToken = token }
