@@ -10,7 +10,7 @@
           <div>{{$store.state.account.user.email}}</div>
           <span class="material-icons account-menu-close-icon" v-on:click="() => showMenu = !showMenu">close</span>
         </div>
-        <div class="account-menu-row">
+        <div class="account-menu-row" v-on:click="() => {$router.push('/edit'); this.showMenu = false}">
           <span class="material-icons account-menu-icon">edit</span>
           <div>Editar conta</div>
         </div>
