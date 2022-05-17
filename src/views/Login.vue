@@ -36,29 +36,13 @@ export default {
     sendHome () { this.$router.push('/') },
     login () {
       this.$store.commit('setIsLoading', true)
-      const axios = require('axios')
-      let config = { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
-      const params = new URLSearchParams()
-      params.append('grant_type', 'password')
-      params.append('username', this.userName)
-      params.append('client_id', this.$store.state.clientId)
-      params.append('password', this.password)
-      params.append('client_secret', this.$store.state.clientSecret)
-      axios.post(this.$store.state.backEndUrl + 'o/token/', params, config).then(response => {
-        this.$store.commit('setAccessToken', response.data.token_type + ' ' + response.data.access_token)
-        config = { headers: { Authorization: this.$store.state.accessToken } }
-        axios.get(this.$store.state.backEndUrl + 'account/me/', config).then(response => {
-          this.$store.commit('saveAccount', response.data)
+      this.$store.dispatch('login', { userName: this.userName, password: this.password }).then(result => {
+        if (result.success) {
           this.$router.push('/eu')
-        })
-      }).catch(error => {
-        if (error.response.data.error_description === 'Invalid credentials given.') {
-          this.toast.error('Senha ou usuario incoretos.')
-          this.haveError = true
         } else {
-          this.toast.error('Desculpe, não foi posivel fazer o login.')
+          this.toast.error(result.message)
+          this.haveError = true
         }
-      }).then(() => {
         this.$store.commit('setIsLoading', false)
       })
     },
