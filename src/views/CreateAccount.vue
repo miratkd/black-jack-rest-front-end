@@ -98,8 +98,10 @@ export default {
       }).then(response => {
         this.toast.success('Conta criada com sucesso!')
         this.$store.commit('saveAccount', response.data)
-        this.$router.push('/eu')
-        this.$store.commit('setIsLoading', false)
+        this.$store.dispatch('login', { userName: this.userName, password: this.password }).then(() => {
+          this.$router.push('/eu')
+          this.$store.commit('setIsLoading', false)
+        })
       }).catch(error => {
         if (error.response.data.user.username) {
           this.userNameError = error.response.data.user.username[0]
