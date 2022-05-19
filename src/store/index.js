@@ -3,6 +3,7 @@ import { createStore } from 'vuex'
 export default createStore({
   state: {
     backEndUrl: 'https://black-jack-rest.herokuapp.com/',
+    localBackEndUrl: 'http://127.0.0.1:8000/',
     account: undefined,
     isLoading: true,
     clientId: '21SjlWa69gM7HdPpLGlQnHrPsmNXgxEMF1XWSRkM',

@@ -93,8 +93,7 @@ export default {
           username: this.userName,
           email: this.email,
           password: this.password
-        },
-        tickets: 100
+        }
       }).then(response => {
         this.toast.success('Conta criada com sucesso!')
         this.$store.commit('saveAccount', response.data)

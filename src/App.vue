@@ -25,7 +25,7 @@ export default {
     if (this.$store.state.accessToken) {
       const axios = require('axios')
       let config = { headers: { Authorization: this.$store.state.accessToken } }
-      return axios.get(this.$store.state.backEndUrl + 'account/me/', config).then(response => {
+      axios.get(this.$store.state.backEndUrl + 'account/me/', config).then(response => {
         this.$store.commit('saveAccount', response.data)
         this.isLoading = false
         this.$store.commit('setIsLoading', false)
