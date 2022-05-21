@@ -30,7 +30,6 @@ export default {
         this.isLoading = false
         this.$store.commit('setIsLoading', false)
       }).catch(error => {
-        console.log(error.response)
         if (error.response.status === 404) {
           config = { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
           const params = new URLSearchParams()

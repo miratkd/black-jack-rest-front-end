@@ -1,9 +1,12 @@
 <template>
-  <div class="page-containear" v-if="this.account">
+  <div class="page-containear" v-if="account">
     <div class="account-section-containear">
-      <div class="account-section-line">{{this.$store.state.account.user.username}}</div>
-      <div class="account-section-line">{{this.$store.state.account.user.email}}</div>
-      <div class="account-section-line">Tickets: {{this.$store.state.account.tickets}}</div>
+      <div class="account-section-line">{{$store.state.account.user.username}}</div>
+      <div v-if="$store.state.account.user.first_name && $store.state.account.user.last_name" class="account-section-line">
+        {{$store.state.account.user.first_name + ' ' + $store.state.account.user.last_name}}
+      </div>
+      <div class="account-section-line email-text">{{$store.state.account.user.email}}</div>
+      <div class="account-section-line">Tickets: {{$store.state.account.tickets}}</div>
     </div>
     <div class="actions-section-containear">
       <div class="tickets-section-containear">
@@ -78,5 +81,8 @@ export default {
   font-size: 25px;
   cursor: pointer;
   border: 3px solid lightsalmon;
+}
+.email-text{
+  font-size: 20px;
 }
 </style>

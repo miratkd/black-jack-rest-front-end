@@ -27,7 +27,7 @@
         Voltar.
       </div>
       <div v-on:click="editAccount()" class="edit-account-form-create-button">
-        Criar conta!
+        Atualizar conta!
       </div>
     </div>
   </div>
@@ -145,5 +145,19 @@ export default {
     color: lightcoral;
     text-align: center;
     margin-top: 0.5vh;
+  }
+  @media only screen and (max-width: 700px) {
+    .edit-account-form-buttons-containear{
+      flex-direction: column;
+      align-items: center;
+    }
+    .edit-account-form-create-button{
+      margin-left: 0;
+      margin-top: 2vh;
+      width: 70vw;
+    }
+    .edit-account-form-cancel-button{
+      width: 70vw;
+    }
   }
 </style>
