@@ -29,14 +29,19 @@
       <div v-on:click="editAccount()" class="edit-account-form-create-button">
         Atualizar conta!
       </div>
+      <span class="material-icons edit-account-form-delete-button" v-on:click="deleteAccount()">delete</span>
     </div>
+
+    <DeleteAccountModal :close="closeDeleteAccount" v-if="showDeleteAccount"/>
   </div>
 </template>
 
 <script>
 import { useToast } from 'vue-toastification'
+import DeleteAccountModal from '@/components/DeleteAccountModal.vue'
 export default {
   name: 'EditAccount',
+  components: { DeleteAccountModal },
   data () {
     return {
       firstName: this.$store.state.account.user.first_name,
@@ -44,10 +49,13 @@ export default {
       email: this.$store.state.account.user.email,
       emailErrorMessage: undefined,
       axios: require('axios'),
-      toast: useToast()
+      toast: useToast(),
+      showDeleteAccount: false
     }
   },
   methods: {
+    closeDeleteAccount () { this.showDeleteAccount = false },
+    deleteAccount () { this.showDeleteAccount = true },
     getErrorClass () {
       if (this.emailErrorMessage) {
         return 'page-input-error'
@@ -117,21 +125,22 @@ export default {
 .edit-account-form-buttons-containear{
     display: flex;
     justify-content: center;
+    align-items: center;
     margin-top: 150px;
     margin-bottom: 50px;
   }
   .edit-account-form-cancel-button{
-    border: 1px solid lightcoral;
+    border: 2px solid lightcoral;
     color: lightcoral;
     width: 20vw;
-    padding: 20px 0;
+    padding: 40px 0;
     text-align: center;
     border-radius: 10px;
     font-size: 40px;
     cursor: pointer;
   }
   .edit-account-form-create-button{
-    border: 1px solid lightseagreen;
+    border: 2px solid lightseagreen;
     width: 20vw;
     padding: 20px 0;
     text-align: center;
@@ -145,6 +154,15 @@ export default {
     color: lightcoral;
     text-align: center;
     margin-top: 0.5vh;
+  }
+  .edit-account-form-delete-button{
+    color: gray;
+    cursor: pointer;
+    font-size: 80px;
+    margin-left: 4vw;
+  }
+  .edit-account-form-delete-button:hover{
+    color: lightcoral;
   }
   @media only screen and (max-width: 700px) {
     .edit-account-form-buttons-containear{

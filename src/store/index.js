@@ -17,6 +17,7 @@ export default createStore({
       state.account = undefined
       state.accessToken = undefined
       localStorage.removeItem('accessToken')
+      localStorage.removeItem('refreshToken')
     },
     setIsLoading (state, value) { state.isLoading = value },
     setTokens (state, tokens) {
