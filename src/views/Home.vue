@@ -42,7 +42,7 @@ export default {
   .home-page-buttons-containear{
     display: flex;
     justify-content: space-evenly;
-    margin-top: 200px;
+    margin: 7vh 0;
   }
   .home-page-button{
     background-color: lightseagreen;
