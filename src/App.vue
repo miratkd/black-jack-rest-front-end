@@ -19,32 +19,46 @@ export default {
       isLoading: true
     }
   },
+  methods: {},
   beforeMount () {
     this.$store.state.accessToken = JSON.parse(localStorage.getItem('accessToken'))
     this.$store.state.refreshToken = JSON.parse(localStorage.getItem('refreshToken'))
     if (this.$store.state.accessToken) {
-      const axios = require('axios')
       let config = { headers: { Authorization: this.$store.state.accessToken } }
-      axios.get(this.$store.state.backEndUrl + 'account/me/', config).then(response => {
+      this.$store.state.axios.get(this.$store.state.backEndUrl + 'account/me/', config).then(response => {
         this.$store.commit('saveAccount', response.data)
         this.isLoading = false
         this.$store.commit('setIsLoading', false)
       }).catch(error => {
         if (error.response.status === 404) {
-          config = { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
-          const params = new URLSearchParams()
-          params.append('grant_type', 'refresh_token')
-          params.append('client_id', this.$store.state.clientId)
-          params.append('client_secret', this.$store.state.clientSecret)
-          params.append('refresh_token', this.$store.state.refreshToken)
-          axios.post(this.$store.state.backEndUrl + 'o/token/', params, config).then(response => {
-            this.$store.commit('setTokens', {
-              accessToken: response.data.token_type + ' ' + response.data.access_token,
-              refreshToken: response.data.refresh_token
-            })
+          // config = { headers: { 'Content-Type': 'application/x-www-form-urlencoded' } }
+          // const params = new URLSearchParams()
+          // params.append('grant_type', 'refresh_token')
+          // params.append('client_id', this.$store.state.clientId)
+          // params.append('client_secret', this.$store.state.clientSecret)
+          // params.append('refresh_token', this.$store.state.refreshToken)
+          // this.$store.state.axios.post(this.$store.state.backEndUrl + 'o/token/', params, config).then(response => {
+          //   this.$store.commit('setTokens', {
+          //     accessToken: response.data.token_type + ' ' + response.data.access_token,
+          //     refreshToken: response.data.refresh_token
+          //   })
+          //   config = { headers: { Authorization: this.$store.state.accessToken } }
+          //   this.$store.state.axios.get(this.$store.state.backEndUrl + 'account/me/', config).then(response => {
+          //     this.$store.commit('saveAccount', response.data)
+          //     this.isLoading = false
+          //     this.$store.commit('setIsLoading', false)
+          //   })
+          // }).catch(() => {
+          //   this.isLoading = false
+          //   this.$store.commit('setIsLoading', false)
+          // })
+          this.$store.dispatch('refreshToken').then(() => {
             config = { headers: { Authorization: this.$store.state.accessToken } }
-            axios.get(this.$store.state.backEndUrl + 'account/me/', config).then(response => {
+            this.$store.state.axios.get(this.$store.state.backEndUrl + 'account/me/', config).then(response => {
               this.$store.commit('saveAccount', response.data)
+              this.isLoading = false
+              this.$store.commit('setIsLoading', false)
+            }).catch(() => {
               this.isLoading = false
               this.$store.commit('setIsLoading', false)
             })

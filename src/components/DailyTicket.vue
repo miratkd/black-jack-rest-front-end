@@ -26,8 +26,7 @@ export default {
       const url = this.$store.state.backEndUrl + 'account/redeem_daily_tickets/'
       const config = { headers: { Authorization: this.$store.state.accessToken } }
       const data = {}
-      const axios = require('axios')
-      axios.put(url, data, config).then(response => {
+      this.$store.state.axios.put(url, data, config).then(response => {
         this.$store.commit('saveAccount', response.data.account)
         this.closeDialog()
         this.toast.success('Tickets resgatados com sucesso')

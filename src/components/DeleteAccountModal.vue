@@ -22,10 +22,9 @@ export default {
   methods: {
     deleteAccount () {
       this.$store.state.isLoading = true
-      const axios = require('axios')
       const url = this.$store.state.backEndUrl + 'account/' + this.$store.state.account.id + '/'
       const config = { headers: { Authorization: this.$store.state.accessToken } }
-      axios.delete(url, config).then(() => {
+      this.$store.state.axios.delete(url, config).then(() => {
         this.toast.success('Conta excluida com sucesso.')
         this.$store.commit('cleanAccount')
         this.$router.push('/')

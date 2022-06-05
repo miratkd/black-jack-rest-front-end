@@ -48,7 +48,6 @@ export default {
       secondName: this.$store.state.account.user.last_name,
       email: this.$store.state.account.user.email,
       emailErrorMessage: undefined,
-      axios: require('axios'),
       toast: useToast(),
       showDeleteAccount: false
     }
@@ -65,14 +64,14 @@ export default {
     editAccount () {
       this.$store.commit('setIsLoading', true)
       const config = { headers: { Authorization: this.$store.state.accessToken } }
-      this.axios.put(this.$store.state.backEndUrl + 'account/' + this.$store.state.account.id + '/', {
+      this.$store.state.axios.put(this.$store.state.backEndUrl + 'account/' + this.$store.state.account.id + '/', {
         user: {
           first_name: this.firstName,
           last_name: this.secondName,
           email: this.email
         }
       }, config).then(() => {
-        this.axios.get(this.$store.state.backEndUrl + 'account/me/', config).then(response => {
+        this.$store.state.axios.get(this.$store.state.backEndUrl + 'account/me/', config).then(response => {
           this.$store.commit('saveAccount', response.data)
           this.$store.commit('setIsLoading', false)
           this.sendHome()

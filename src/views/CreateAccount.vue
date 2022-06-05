@@ -87,8 +87,7 @@ export default {
         return false
       }
       this.$store.commit('setIsLoading', true)
-      const axios = require('axios')
-      axios.post(this.$store.state.backEndUrl + 'account/', {
+      this.$store.state.axios.post(this.$store.state.backEndUrl + 'account/', {
         user: {
           username: this.userName,
           email: this.email,
