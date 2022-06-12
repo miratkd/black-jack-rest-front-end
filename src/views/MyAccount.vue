@@ -1,6 +1,6 @@
 <template>
   <div class="page-containear" v-if="account">
-    <div class="account-section-containear">
+    <div class="account-section-containear mobile-hide">
       <div class="account-section-line">{{$store.state.account.user.username}}</div>
       <div v-if="$store.state.account.user.first_name && $store.state.account.user.last_name" class="account-section-line">
         {{$store.state.account.user.first_name + ' ' + $store.state.account.user.last_name}}
@@ -49,6 +49,7 @@ export default {
 .page-containear{
   display: flex;
   min-height: 86.3vh;
+  font-size: 1vw;
 }
 .account-section-containear{
   background-color: lightseagreen;
@@ -59,8 +60,9 @@ export default {
   flex-direction: column;
   align-items: center;
   color: white;
-  font-size: 25px;
-  padding: 30px 0;
+  font-size: 2.5em;
+  padding: 30px 0.5em;
+  min-width: fit-content;
 }
 .account-section-line{
   margin-bottom: 30px;
@@ -84,5 +86,22 @@ export default {
 }
 .email-text{
   font-size: 20px;
+}
+@media only screen and (max-width: 1000px) {
+  .page-containear{
+    font-size: 1.5vw;
+  }
+}
+@media only screen and (max-width: 650px) {
+  .page-containear{
+    font-size: 1.5vw;
+  }
+  .mobile-hide{
+    display: none;
+  }
+  .daily-ticket{
+    flex: 1;
+    text-align: center;
+  }
 }
 </style>

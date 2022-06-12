@@ -40,7 +40,7 @@ export default {
 
 <style scoped>
 .page-containear{
-  position: absolute;
+  position: fixed;
   z-index: 2;
   top: 0;
   left: 0;
