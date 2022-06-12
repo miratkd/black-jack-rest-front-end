@@ -33,6 +33,10 @@ export default {
       }).catch(error => {
         if (error.response.data === 'have you redeemed your daily tickets today.') {
           this.toast.error('Desculpe, você ja resgatou o seu ticket hoje')
+        } else if (error.response.status === 401 && error.response.data === 'you need a token for this endpoint') {
+          this.$store.dispatch('refreshToken').then(() => {
+            this.submitFreeTicket()
+          })
         } else {
           this.toast.error('Não foi possivel resgatar o ticket')
         }

@@ -77,9 +77,17 @@ export default {
           this.sendHome()
         })
       }).catch(error => {
-        if (error.response.data.user.email) this.emailErrorMessage = error.response.data.user.email[0]
-        else this.toast.error('Desculpe, não foi possivel atualizar a conta')
-        this.$store.commit('setIsLoading', false)
+        if (error.response.status === 401 && error.response.data === 'you need a token for this endpoint') {
+          this.$store.dispatch('refreshToken').then(() => {
+            this.editAccount()
+          })
+        } else if (error.response.data.user.email) {
+          this.emailErrorMessage = error.response.data.user.email[0]
+          this.$store.commit('setIsLoading', false)
+        } else {
+          this.toast.error('Desculpe, não foi possivel atualizar a conta')
+          this.$store.commit('setIsLoading', false)
+        }
       })
     }
   }
