@@ -10,7 +10,7 @@
       <router-link to="/criar-conta" class="home-page-button">
         Criar uma conta.
       </router-link>
-      <router-link to="/login" class="home-page-button">
+      <router-link to="/login" class="home-page-button home-page-second-button">
         Ja tenho uma conta.
       </router-link>
     </div>
@@ -27,16 +27,19 @@ export default {
 </script>
 
 <style scoped>
+  .home-page{
+    font-size: 1vw;
+  }
   .home-page-title{
     text-align: center;
     padding-top: 50px;
-    font-size: 40px;
+    font-size: 4.5em;
     font-weight: 700;
   }
   .home-page-subtitle{
     text-align: center;
     padding: 50px 100px 0 100px;
-    font-size: 33px;
+    font-size: 3em;
     font-weight: 500;
   }
   .home-page-buttons-containear{
@@ -47,11 +50,42 @@ export default {
   .home-page-button{
     background-color: lightseagreen;
     color: white;
-    padding: 100px 0;
+    padding: 5vh 0;
     text-align: center;
     width: 35%;
     border-radius: 10px;
     cursor: pointer;
-    font-size: 45px;
+    font-size: 4em;
   }
+@media only screen and (max-width: 950px) {
+  .home-page{
+    font-size: 1.25vw;
+  }
+}
+@media only screen and (max-width: 750px) {
+  .home-page{
+    font-size: 1.5vw;
+  }
+}
+@media only screen and (max-width: 650px) {
+  .home-page{
+    font-size: 1.75vw;
+  }
+  .home-page-buttons-containear{
+    flex-direction: column;
+    align-items: center;
+  }
+  .home-page-button{
+    width: 90%;
+  }
+  .home-page-second-button{
+    margin-top: 5vh;
+  }
+  .home-page-subtitle{
+    padding: 4vh 5vw;
+  }
+  .home-page-title{
+    padding: 2vh 3vw;
+  }
+}
 </style>
