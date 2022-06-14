@@ -12,30 +12,41 @@
       <div class="tickets-section-containear">
         <div class="daily-ticket" v-on:click="() => dailyTicket = true">Resgatar ticket diario!</div>
       </div>
+      <div class="game-buttons-container">
+        <div class="game-button" v-on:click="() => createMathDialog = true">Novo jogo</div>
+        <div class="game-button">Retornar ao jogo</div>
+      </div>
     </div>
 
     <!-- Dialogs -->
     <DailyTicketDialog v-if="dailyTicket" :closeDialog="closeDialog"/>
+    <CreateMathDialog v-if="createMathDialog" :closeDialog="closeCreateMathDialog"/>
   </div>
 </template>
 
 <script>
 import DailyTicketDialog from '@/components/DailyTicket.vue'
+import CreateMathDialog from '@/components/CreateMath.vue'
 export default {
   name: 'MyAccount',
   data () {
     return {
       account: undefined,
-      dailyTicket: false
+      dailyTicket: false,
+      createMathDialog: false
     }
   },
   components: {
-    DailyTicketDialog
+    DailyTicketDialog,
+    CreateMathDialog
   },
   methods: {
     closeDialog () {
       this.dailyTicket = false
       this.$store.state.isLoading = false
+    },
+    closeCreateMathDialog () {
+      this.createMathDialog = false
     }
   },
   beforeMount () {
@@ -80,12 +91,30 @@ export default {
   color: white;
   padding: 25px;
   border-radius: 10px;
-  font-size: 25px;
+  font-size: 2em;
   cursor: pointer;
   border: 3px solid lightsalmon;
 }
 .email-text{
-  font-size: 20px;
+  font-size: 0.8em;
+}
+.game-buttons-container{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20vh;
+}
+.game-button{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: lightseagreen;
+  color: white;
+  border-radius: 10px;
+  font-size: 2.5em;
+  cursor: pointer;
+  border: 3px solid lightsalmon;
+  height: 25vh;
+  width: 25vw;
 }
 @media only screen and (max-width: 1000px) {
   .page-containear{
