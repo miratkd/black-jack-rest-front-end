@@ -43,7 +43,9 @@ export default {
         this.closeDialog()
       })
     }
-  }
+  },
+  mounted () { document.documentElement.style.overflow = 'hidden' },
+  unmounted () { document.documentElement.style.overflow = 'auto' }
 }
 </script>
 

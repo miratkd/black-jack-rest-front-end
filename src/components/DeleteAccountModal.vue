@@ -34,7 +34,9 @@ export default {
         this.$store.state.isLoading = false
       })
     }
-  }
+  },
+  mounted () { document.documentElement.style.overflow = 'hidden' },
+  unmounted () { document.documentElement.style.overflow = 'auto' }
 }
 </script>
 
