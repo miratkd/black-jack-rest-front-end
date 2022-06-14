@@ -1,8 +1,8 @@
 <template>
-  <div class="page-containear" v-on:click="closeDialog()">
+  <div class="modal-container" v-on:click="closeDialog()">
     <div class="page-content" v-on:click.stop>
       <div class="content-title">Resgate seus tickets diarios!</div>
-      <div class="content-subtitle">Uma vez por dia, você pode resgatr uma quantidade gratuita de tickets, clique no botão abaixo e os tickets serão automaticamente adicionados a sua conta!</div>
+      <div class="content-subtitle">Uma vez por dia, você pode resgatar uma quantidade gratuita de tickets, clique no botão abaixo e os tickets serão automaticamente adicionados a sua conta!</div>
       <div class="content-button-containear">
         <div v-on:click="submitFreeTicket()" class="content-button">Resgatar tickets</div>
       </div>
@@ -48,7 +48,7 @@ export default {
 </script>
 
 <style scoped>
-.page-containear{
+.modal-container{
   position: fixed;
   z-index: 10;
   top: 0;
@@ -60,6 +60,7 @@ export default {
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 1vw;
 }
 .page-content{
   background-color: white;
@@ -68,13 +69,13 @@ export default {
   z-index: 2;
 }
 .content-title{
-  font-size: 40px;
+  font-size: 4em;
   text-align: center;
 }
 .content-subtitle{
-  max-width: 35vw;
+  max-width: 80vw;
   margin-top: 1vh;
-  font-size: 20px;
+  font-size: 2em;
 }
 .content-button-containear{
   display: flex;
@@ -89,8 +90,22 @@ export default {
   align-self: center;
   padding: 1vh 0;
   text-align: center;
-  font-size: 30px;
+  font-size: 3em;
   cursor: pointer;
   border: 3px solid lightsalmon;
+}
+@media only screen and (max-width: 750px) {
+  .modal-container{
+    font-size: 1.5vw;
+  }
+  .page-content{
+    padding: 5vw;
+    max-width: 80vw;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .modal-container{
+    font-size: 2vw;
+  }
 }
 </style>
