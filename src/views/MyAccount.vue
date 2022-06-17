@@ -20,7 +20,7 @@
 
     <!-- Dialogs -->
     <DailyTicketDialog v-if="dailyTicket" :closeDialog="closeDialog"/>
-    <CreateMathDialog v-if="createMathDialog" :closeDialog="closeCreateMathDialog"/>
+    <CreateMathDialog v-if="createMathDialog" :account="account" :closeDialog="closeCreateMathDialog"/>
   </div>
 </template>
 

@@ -1,13 +1,21 @@
 <template>
   <div class="modal-container" v-on:click="closeDialog()">
-    <div class="page-content" v-on:click.stop>test</div>
+    <div class="page-content" v-on:click.stop>
+      <div class="createmath-modal-title">Você esta prestes a iniciar uma nova partida!</div>
+      <div class="createmath-modal-subtitle">Insira o valor que deseja apostar. Se ganhar, ira receber o triplo do que apostou! caso contrario, ira perder tudo.</div>
+      <div class="createmath-modal-input-container">
+        <div class="createmath-modal-input-label">Aposta:</div>
+        <input type="number" class="createmath-modal-input"/>
+      </div>
+      <div class="createmath-modal-button">Criar Partida!</div>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: 'CreateMath',
-  props: ['closeDialog'],
+  props: ['closeDialog', 'account'],
   mounted () { document.documentElement.style.overflow = 'hidden' },
   unmounted () { document.documentElement.style.overflow = 'auto' }
 }
@@ -33,5 +41,52 @@ export default {
   padding: 50px;
   border-radius: 10px;
   z-index: 2;
+  width: 80%;
+  text-align: center;
+}
+.createmath-modal-title{
+  font-size: 4em;
+}
+.createmath-modal-subtitle{
+  margin-top: 1vh;
+  font-size: 2em;
+}
+.createmath-modal-input-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3vh;
+}
+.createmath-modal-input-label{
+  font-size: 2.5em;
+  margin-right: 5vw;
+}
+.createmath-modal-input{
+  border: 1px solid lightseagreen;
+  border-radius: 5px;
+  padding: 1vh 0.5vw 1vh 2vw;
+  color: lightseagreen;
+  font-size: 2em;
+  width: 15vw;
+}
+.createmath-modal-input:focus{
+  outline: none;
+  outline: 2.5px solid lightseagreen;
+}
+.createmath-modal-button{
+  margin: 5vh auto 0 auto;
+  width: 20vw;
+  background-color: lightseagreen;
+  text-align: center;
+  padding: 2vh 0;
+  color: white;
+  border-radius: 10px;
+  font-size: 2em;
+  cursor: pointer;
+}
+@media only screen and (max-width: 850px) {
+  .modal-container{
+    font-size: 1.25vw;
+  }
 }
 </style>
