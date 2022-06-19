@@ -121,10 +121,7 @@ export default {
     font-size: 1.5vw;
   }
 }
-@media only screen and (max-width: 650px) {
-  .page-containear{
-    font-size: 1.5vw;
-  }
+@media only screen and (max-width: 800px) {
   .mobile-hide{
     display: none;
   }
@@ -132,5 +129,18 @@ export default {
     flex: 1;
     text-align: center;
   }
+  .game-buttons-container{
+    flex-direction: column;
+    margin-top: 5vh;
+  }
+  .game-button{
+    width: 100%;
+    height: 10vh;
+    margin-bottom: 3vh;
+  }
 }
+@media only screen and (max-width: 500px) { .page-containear{ font-size: 2.25vw; } }
+@media only screen and (max-width: 400px) { .page-containear{ font-size: 2.5vw; } }
+@media only screen and (max-width: 300px) { .page-containear{ font-size: 2.75vw; } }
+@media only screen and (max-width: 200px) { .page-containear{ font-size: 3vw; } }
 </style>
