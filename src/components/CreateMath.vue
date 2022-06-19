@@ -89,4 +89,18 @@ export default {
     font-size: 1.25vw;
   }
 }
+@media only screen and (max-width: 800px) {
+  .modal-container{ font-size: 1.5vw; }
+  .createmath-modal-input{ width: 50vw; }
+  .createmath-modal-button{ width: 40vw; }
+}
+@media only screen and (max-width: 600px) {
+  .modal-container{ font-size: 2vw; }
+  .page-content{ padding: 5vw; }
+}
+@media only screen and (max-width: 500px) { .modal-container{ font-size: 2.25vw; } }
+@media only screen and (max-width: 400px) { .modal-container{ font-size: 2.5vw; } }
+@media only screen and (max-width: 300px) { .modal-container{ font-size: 2.75vw; } }
+@media only screen and (max-width: 200px) { .modal-container{ font-size: 3vw; } }
+
 </style>
