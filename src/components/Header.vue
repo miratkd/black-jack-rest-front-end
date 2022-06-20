@@ -50,9 +50,11 @@ export default {
     background-color: lightseagreen;
     padding: 10px;
     justify-content: space-between;
+    font-size: 1vw;
+    min-height: 5vh;
   }
   .header-title{
-    font-size: 40px;
+    font-size: 3.1em;
     font-weight: 700;
     color: white;
     cursor: pointer;
@@ -62,7 +64,7 @@ export default {
     align-items: center;
   }
   .header-title-user-icon{
-    font-size: 40px;
+    font-size: 1.3em;
     margin-right: 30px;
   }
   .account-menu-containear{
@@ -74,7 +76,7 @@ export default {
     color: lightseagreen;
     padding: 1.5vw;
     right: 2vw ;
-    font-size: 25px;
+    font-size: 2em;
   }
   .account-menu-row{
     display: flex;
@@ -83,16 +85,23 @@ export default {
   }
   .account-menu-icon{
     margin-right: 1vw;
+    font-size: 1em;
   }
   .account-menu-close{
     display: flex;
     justify-content: space-between;
-    font-size: 25px;
+    font-size: 1em;
     align-items: center;
   }
   .account-menu-close-icon{
     cursor: pointer;
-    margin-left: 1.5vw;
-    font-size: 35px;
+    margin-left: 2vw;
+    font-size: 1em;
   }
+@media only screen and (max-width: 1000px) { .header-containear{ font-size: 1.5vw; } }
+@media only screen and (max-width: 800px) { .header-containear{ font-size: 1.75vw; } }
+@media only screen and (max-width: 650px) { .header-containear{ font-size: 2vw; } }
+@media only screen and (max-width: 500px) { .header-containear{ font-size: 2.25vw; } }
+@media only screen and (max-width: 300px) { .header-containear{ font-size: 2.75vw; } }
+@media only screen and (max-width: 200px) { .header-containear{ font-size: 3vw; } }
 </style>
