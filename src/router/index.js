@@ -4,6 +4,7 @@ import CreateAccount from '../views/CreateAccount.vue'
 import MyAccount from '../views/MyAccount.vue'
 import Login from '../views/Login.vue'
 import EditAccount from '../views/EditAccount.vue'
+import Math from '../views/Math.vue'
 
 const routes = [
   {
@@ -30,6 +31,11 @@ const routes = [
     path: '/edit',
     name: 'EditAccount',
     component: EditAccount
+  },
+  {
+    path: '/math',
+    name: 'Math',
+    component: Math
   }
 ]
 

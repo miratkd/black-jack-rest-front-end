@@ -5,9 +5,9 @@
       <div class="createmath-modal-subtitle">Insira o valor que deseja apostar. Se ganhar, ira receber o triplo do que apostou! caso contrario, ira perder tudo.</div>
       <div class="createmath-modal-input-container">
         <div class="createmath-modal-input-label">Aposta:</div>
-        <input type="number" class="createmath-modal-input"/>
+        <input type="number" v-model="bet" class="createmath-modal-input"/>
       </div>
-      <div class="createmath-modal-button">Criar Partida!</div>
+      <div class="createmath-modal-button" v-on:click="createAccount()">Criar Partida!</div>
     </div>
   </div>
 </template>
@@ -16,6 +16,26 @@
 export default {
   name: 'CreateMath',
   props: ['closeDialog', 'account'],
+  data () {
+    return {
+      bet: undefined
+    }
+  },
+  methods: {
+    createAccount () {
+      this.$store.state.isLoading = true
+      const url = this.$store.state.backEndUrl + 'math/'
+      const config = { headers: { Authorization: this.$store.state.accessToken } }
+      const data = {
+        account: this.account.id,
+        buy_in_value: this.bet
+      }
+      this.$store.state.axios.post(url, data, config).then(response => {
+        this.$store.commit('setMathId', response.data.id)
+        this.$router.push('Math')
+      })
+    }
+  },
   mounted () { document.documentElement.style.overflow = 'hidden' },
   unmounted () { document.documentElement.style.overflow = 'auto' }
 }
