@@ -31,8 +31,14 @@ export default {
         buy_in_value: this.bet
       }
       this.$store.state.axios.post(url, data, config).then(response => {
-        this.$store.commit('setMathId', response.data.id)
+        localStorage.setItem('activeMath', response.data.id)
         this.$router.push('Math')
+      }).catch(error => {
+        if (error.response.status === 401 && error.response.data === 'you need a token for this endpoint') {
+          this.$store.dispatch('refreshToken').then(() => {
+            this.createAccount()
+          })
+        }
       })
     }
   },
