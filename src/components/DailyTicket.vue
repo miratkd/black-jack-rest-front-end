@@ -11,15 +11,9 @@
 </template>
 
 <script>
-import { useToast } from 'vue-toastification'
 export default {
   name: 'DailyTicketDialog',
   props: ['closeDialog'],
-  data () {
-    return {
-      toast: useToast()
-    }
-  },
   methods: {
     submitFreeTicket () {
       this.$store.state.isLoading = true
@@ -29,16 +23,16 @@ export default {
       this.$store.state.axios.put(url, data, config).then(response => {
         this.$store.commit('saveAccount', response.data.account)
         this.closeDialog()
-        this.toast.success('Tickets resgatados com sucesso')
+        this.$store.state.toast.success('Tickets resgatados com sucesso')
       }).catch(error => {
         if (error.response.data === 'have you redeemed your daily tickets today.') {
-          this.toast.error('Desculpe, você ja resgatou o seu ticket hoje')
+          this.$store.state.toast.error('Desculpe, você ja resgatou o seu ticket hoje')
         } else if (error.response.status === 401 && error.response.data === 'you need a token for this endpoint') {
           this.$store.dispatch('refreshToken').then(() => {
             this.submitFreeTicket()
           })
         } else {
-          this.toast.error('Não foi possivel resgatar o ticket')
+          this.$store.state.toast.error('Não foi possivel resgatar o ticket')
         }
         this.closeDialog()
       })

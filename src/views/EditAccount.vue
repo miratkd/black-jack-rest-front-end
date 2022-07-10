@@ -37,7 +37,6 @@
 </template>
 
 <script>
-import { useToast } from 'vue-toastification'
 import DeleteAccountModal from '@/components/DeleteAccountModal.vue'
 export default {
   name: 'EditAccount',
@@ -48,7 +47,6 @@ export default {
       secondName: this.$store.state.account.user.last_name,
       email: this.$store.state.account.user.email,
       emailErrorMessage: undefined,
-      toast: useToast(),
       showDeleteAccount: false
     }
   },
@@ -85,7 +83,7 @@ export default {
           this.emailErrorMessage = error.response.data.user.email[0]
           this.$store.commit('setIsLoading', false)
         } else {
-          this.toast.error('Desculpe, não foi possivel atualizar a conta')
+          this.$store.state.toast.error('Desculpe, não foi possivel atualizar a conta')
           this.$store.commit('setIsLoading', false)
         }
       })

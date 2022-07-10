@@ -7,7 +7,7 @@
         <div class="createmath-modal-input-label">Aposta:</div>
         <input type="number" v-model="bet" class="createmath-modal-input"/>
       </div>
-      <div class="createmath-modal-button" v-on:click="createAccount()">Criar Partida!</div>
+      <div class="createmath-modal-button" v-on:click="createMath()">Criar Partida!</div>
     </div>
   </div>
 </template>
@@ -22,7 +22,7 @@ export default {
     }
   },
   methods: {
-    createAccount () {
+    createMath () {
       this.$store.state.isLoading = true
       const url = this.$store.state.backEndUrl + 'math/'
       const config = { headers: { Authorization: this.$store.state.accessToken } }
@@ -36,7 +36,7 @@ export default {
       }).catch(error => {
         if (error.response.status === 401 && error.response.data === 'you need a token for this endpoint') {
           this.$store.dispatch('refreshToken').then(() => {
-            this.createAccount()
+            this.createMath()
           })
         }
       })

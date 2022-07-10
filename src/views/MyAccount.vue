@@ -14,7 +14,7 @@
       </div>
       <div class="game-buttons-container">
         <div class="game-button" v-on:click="() => createMathDialog = true">Novo jogo</div>
-        <div class="game-button">Retornar ao jogo</div>
+        <div class="game-button" v-on:click="openMath()">Retornar ao jogo</div>
       </div>
     </div>
 
@@ -41,6 +41,14 @@ export default {
     CreateMathDialog
   },
   methods: {
+    openMath () {
+      if (localStorage.getItem('activeMath')) {
+        this.$store.state.isLoading = true
+        this.$router.push('Math')
+      } else {
+        this.$store.state.toast.error('Desculpe, você não tem uma partida em andamento.')
+      }
+    },
     closeDialog () {
       this.dailyTicket = false
       this.$store.state.isLoading = false

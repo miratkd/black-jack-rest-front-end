@@ -21,14 +21,12 @@
 </template>
 
 <script>
-import { useToast } from 'vue-toastification'
 export default {
   name: 'Login',
   data () {
     return {
       userName: undefined,
       password: undefined,
-      toast: useToast(),
       haveError: false
     }
   },
@@ -40,7 +38,7 @@ export default {
         if (result.success) {
           this.$router.push('/eu')
         } else {
-          this.toast.error(result.message)
+          this.$store.state.toast.error(result.message)
           this.haveError = true
         }
         this.$store.commit('setIsLoading', false)

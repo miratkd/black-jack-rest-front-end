@@ -10,27 +10,21 @@
 </template>
 
 <script>
-import { useToast } from 'vue-toastification'
 export default {
   name: 'DeleteAccountModal',
   props: ['close'],
-  data () {
-    return {
-      toast: useToast()
-    }
-  },
   methods: {
     deleteAccount () {
       this.$store.state.isLoading = true
       const url = this.$store.state.backEndUrl + 'account/' + this.$store.state.account.id + '/'
       const config = { headers: { Authorization: this.$store.state.accessToken } }
       this.$store.state.axios.delete(url, config).then(() => {
-        this.toast.success('Conta excluida com sucesso.')
+        this.$store.state.toast.success('Conta excluida com sucesso.')
         this.$store.commit('cleanAccount')
         this.$router.push('/')
         this.$store.state.isLoading = false
       }).catch(() => {
-        this.toast.error('Desculpe, não foi possivel excluir a conta.')
+        this.$store.state.toast.error('Desculpe, não foi possivel excluir a conta.')
         this.$store.state.isLoading = false
       })
     }

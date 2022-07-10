@@ -1,4 +1,5 @@
 import { createStore } from 'vuex'
+import { useToast } from 'vue-toastification'
 
 export default createStore({
   state: {
@@ -10,7 +11,8 @@ export default createStore({
     clientSecret: '2aQW0Wmbguj2XHHYGj8b6HNbRvP6VKn8L2NTx2h3mpGso03pMpiANK1pFRfYrWwNYQcHZHuXKTUvp4PIkHhr2eF10nVfEq76Ae9l4jfWbXKdJDSvZGrGtD3mgxqGmv40',
     accessToken: undefined,
     refreshToken: undefined,
-    axios: require('axios')
+    axios: require('axios'),
+    toast: useToast()
   },
   mutations: {
     saveAccount (state, account) { state.account = account },

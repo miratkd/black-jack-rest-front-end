@@ -1,5 +1,5 @@
 <template>
-  <div class="math-page">
+  <div class="math-page" v-if="!$store.state.isLoading">
     <div class="math-page-header">
       <div class="math-page-header-button">Premio: {{math.prize}} tickets!</div>
       <div class="math-page-header-button">Round: {{math.math_active_round}}</div>
@@ -18,7 +18,7 @@
         </div>
         <div class="math-page-body-back">Voltar</div>
       </div>
-      <div>test</div>
+      <div class="math-page-body-table">test</div>
     </div>
   </div>
 </template>
@@ -112,4 +112,11 @@ export default {
   cursor: pointer;
   margin-top: 3vh;
 }
+.math-page-body-table{
+  background-color: lightgray;
+  min-height: 55vh;
+  flex: 1;
+  margin-left: 4vw;
+}
+
 </style>

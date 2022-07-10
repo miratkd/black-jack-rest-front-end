@@ -55,7 +55,6 @@
 </template>
 
 <script>
-import { useToast } from 'vue-toastification'
 export default {
   name: 'CreateAccount',
   data () {
@@ -64,7 +63,6 @@ export default {
       email: '',
       password: '',
       secondPassword: '',
-      toast: useToast(),
       userNameError: undefined,
       emailError: undefined,
       passwordError: undefined,
@@ -94,7 +92,7 @@ export default {
           password: this.password
         }
       }).then(response => {
-        this.toast.success('Conta criada com sucesso!')
+        this.$store.state.toast.success('Conta criada com sucesso!')
         this.$store.commit('saveAccount', response.data)
         this.$store.dispatch('login', { userName: this.userName, password: this.password }).then(() => {
           this.$router.push('/eu')
