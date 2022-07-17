@@ -18,7 +18,14 @@
         </div>
         <div class="math-page-body-back">Voltar</div>
       </div>
-      <div class="math-page-body-table">test</div>
+      <div class="math-page-body-table">
+        <div class="math-page-body-table-cards">test1</div>
+        <div class="math-page-body-table-buttons">
+          <div class="math-page-body-table-button">Sacar carta</div>
+          <div class="math-page-body-table-button">Manter mao</div>
+          <div class="math-page-body-table-button">Proximo round</div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -117,6 +124,27 @@ export default {
   min-height: 55vh;
   flex: 1;
   margin-left: 4vw;
+  display: flex;
+  border-radius: 10px;
 }
-
+.math-page-body-table-cards{
+  width: 70%;
+}
+.math-page-body-table-buttons{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin-right: 1.5vw;
+}
+.math-page-body-table-button{
+  background-color: lightseagreen;
+  color: white;
+  padding: 2vw 0;
+  border-radius: 10px;
+  font-size: 1.5em;
+  border: 3px solid lightsalmon;
+  text-align: center;
+  cursor: pointer;
+}
 </style>
