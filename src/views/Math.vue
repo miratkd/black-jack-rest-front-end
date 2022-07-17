@@ -19,7 +19,20 @@
         <div class="math-page-body-back">Voltar</div>
       </div>
       <div class="math-page-body-table">
-        <div class="math-page-body-table-cards">test1</div>
+        <div class="math-page-body-table-cards">
+          <div class="math-page-body-table-cards-row">
+            <div class="math-page-body-table-cards-row-title">casa:</div>
+            <div class="math-page-body-table-cards-row-container">
+              <CardLoader class="math-page-body-table-cards-img" v-for="(card, idx) in math.dealer_hand" :key="idx" :card="card"/>
+            </div>
+          </div>
+          <div class="math-page-body-table-cards-row">
+            <div class="math-page-body-table-cards-row-title">{{formatName($store.state.account.user.username)}}:</div>
+            <div class="math-page-body-table-cards-row-container">
+              <CardLoader class="math-page-body-table-cards-img" v-for="(card, idx) in math.player_hand.cards" :key="idx" :card="card"/>
+            </div>
+          </div>
+        </div>
         <div class="math-page-body-table-buttons">
           <div class="math-page-body-table-button">Sacar carta</div>
           <div class="math-page-body-table-button">Manter mao</div>
@@ -31,8 +44,12 @@
 </template>
 
 <script>
+import CardLoader from '@/components/CardLoader.vue'
 export default {
   name: 'Math',
+  components: {
+    CardLoader
+  },
   data () {
     return {
       math: {}
@@ -129,6 +146,9 @@ export default {
 }
 .math-page-body-table-cards{
   width: 70%;
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
 }
 .math-page-body-table-buttons{
   flex: 1;
@@ -146,5 +166,23 @@ export default {
   border: 3px solid lightsalmon;
   text-align: center;
   cursor: pointer;
+}
+.math-page-body-table-cards-row{
+  display: flex;
+  align-items: center;
+  margin-right: 2vw;
+}
+.math-page-body-table-cards-row-title{
+  font-size: 2.5em;
+  margin-left: 2vw;
+}
+.math-page-body-table-cards-row-container{
+  display: flex;
+  flex: 1;
+  overflow-x: auto;
+}
+.math-page-body-table-cards-img{
+  height: 20vh;
+  margin-left: 2vw;
 }
 </style>
