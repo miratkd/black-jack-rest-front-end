@@ -31,6 +31,7 @@
             <div class="math-page-body-table-cards-row-container">
               <CardLoader class="math-page-body-table-cards-img" v-for="(card, idx) in math.player_hand.cards" :key="idx" :card="card"/>
             </div>
+            <div class="math-page-body-table-cards-row-title" :style="specialColors()">{{math.player_hand.total_point}}</div>
           </div>
         </div>
         <div class="math-page-body-table-buttons">
@@ -56,6 +57,10 @@ export default {
     }
   },
   methods: {
+    specialColors () {
+      if (this.math.player_hand.total_point > 21) return 'color: red'
+      else if (this.math.player_hand.total_point === 21) return 'color: yellow'
+    },
     formatName (name) {
       if (name.length > 9) return name.slice(0, 9) + '...'
       return name
@@ -76,7 +81,8 @@ export default {
     },
     getHouseRounds (math) { return math.math_active_round - 1 - math.rounds_won }
   },
-  mounted () {
+  created () {
+    this.$store.state.isLoading = true
     if (!localStorage.getItem('activeMath')) this.$router.push('MyAccount')
     this.getMath()
   }
