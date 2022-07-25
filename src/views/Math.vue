@@ -35,7 +35,7 @@
           </div>
         </div>
         <div class="math-page-body-table-buttons">
-          <div class="math-page-body-table-button">Sacar carta</div>
+          <div class="math-page-body-table-button" v-on:click="drawCard()">Sacar carta</div>
           <div class="math-page-body-table-button">Manter mao</div>
           <div class="math-page-body-table-button">Proximo round</div>
         </div>
@@ -57,6 +57,25 @@ export default {
     }
   },
   methods: {
+    drawCard () {
+      this.$store.state.isLoading = true
+      const url = this.$store.state.backEndUrl + 'math/' + localStorage.getItem('activeMath') + '/draw_card/'
+      const config = { headers: { Authorization: this.$store.state.accessToken } }
+      const data = {}
+      this.$store.state.axios.put(url, data, config).then(response => {
+        this.math = response.data
+        this.$store.state.isLoading = false
+      }).catch(error => {
+        if (error.response.status === 401 && error.response.data === 'you need a token for this endpoint') {
+          this.$store.dispatch('refreshToken').then(() => {
+            this.drawCard()
+          })
+        } else if (error.response.status === 400 && error.response.data.message === 'You can not draw another card, this round is over.') {
+          this.$store.state.toast.error('Você não pode sacar outra carta, esse round já terminou.')
+          this.$store.state.isLoading = false
+        }
+      })
+    },
     specialColors () {
       if (this.math.player_hand.total_point > 21) return 'color: red'
       else if (this.math.player_hand.total_point === 21) return 'color: yellow'
