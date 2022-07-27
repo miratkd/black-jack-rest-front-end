@@ -36,8 +36,8 @@
         </div>
         <div class="math-page-body-table-buttons">
           <div class="math-page-body-table-button" v-on:click="drawCard()">Sacar carta</div>
-          <div class="math-page-body-table-button">Manter mao</div>
-          <div class="math-page-body-table-button">Proximo round</div>
+          <div class="math-page-body-table-button" >Manter mao</div>
+          <div class="math-page-body-table-button" v-on:click="nextRound()">Proximo round</div>
         </div>
       </div>
     </div>
@@ -57,6 +57,22 @@ export default {
     }
   },
   methods: {
+    nextRound () {
+      this.$store.state.isLoading = true
+      const url = this.$store.state.backEndUrl + 'math/' + localStorage.getItem('activeMath') + '/next_round/'
+      const config = { headers: { Authorization: this.$store.state.accessToken } }
+      const data = {}
+      this.$store.state.axios.put(url, data, config).then(response => {
+        this.math = response.data
+        this.$store.state.isLoading = false
+      }).catch(error => {
+        if (error.response.status === 401 && error.response.data === 'you need a token for this endpoint') {
+          this.$store.dispatch('refreshToken').then(() => {
+            this.nextRound()
+          })
+        }
+      })
+    },
     drawCard () {
       this.$store.state.isLoading = true
       const url = this.$store.state.backEndUrl + 'math/' + localStorage.getItem('activeMath') + '/draw_card/'
