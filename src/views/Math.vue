@@ -22,7 +22,10 @@
         <div class="math-page-body-table-cards">
           <div class="math-page-body-table-cards-row">
             <div class="math-page-body-table-cards-row-title">casa:</div>
-            <div class="math-page-body-table-cards-row-container">
+            <div v-if="math.dealer_hand.cards" class="math-page-body-table-cards-row-container">
+              <CardLoader class="math-page-body-table-cards-img" v-for="(card, idx) in math.dealer_hand.cards" :key="idx" :card="card"/>
+            </div>
+            <div v-else class="math-page-body-table-cards-row-container">
               <CardLoader class="math-page-body-table-cards-img" v-for="(card, idx) in math.dealer_hand" :key="idx" :card="card"/>
             </div>
           </div>
@@ -36,7 +39,7 @@
         </div>
         <div class="math-page-body-table-buttons">
           <div class="math-page-body-table-button" v-on:click="drawCard()">Sacar carta</div>
-          <div class="math-page-body-table-button" >Manter mao</div>
+          <div class="math-page-body-table-button" v-on:click="hold()">Manter mao</div>
           <div class="math-page-body-table-button" v-on:click="nextRound()">Proximo round</div>
         </div>
       </div>
@@ -57,6 +60,17 @@ export default {
     }
   },
   methods: {
+    hold () {
+      this.$store.state.isLoading = true
+      const url = this.$store.state.backEndUrl + 'math/' + localStorage.getItem('activeMath') + '/hold/'
+      const config = { headers: { Authorization: this.$store.state.accessToken } }
+      const data = {}
+      this.$store.state.axios.put(url, data, config).then(response => {
+        this.math = response.data.math
+        this.$store.state.toast.success(response.data.message)
+        this.$store.state.isLoading = false
+      })
+    },
     nextRound () {
       this.$store.state.isLoading = true
       const url = this.$store.state.backEndUrl + 'math/' + localStorage.getItem('activeMath') + '/next_round/'
@@ -114,7 +128,10 @@ export default {
         }
       })
     },
-    getHouseRounds (math) { return math.math_active_round - 1 - math.rounds_won }
+    getHouseRounds (math) {
+      if (math.dealer_hand.cards) return math.math_active_round - math.rounds_won
+      return math.math_active_round - 1 - math.rounds_won
+    }
   },
   created () {
     this.$store.state.isLoading = true
