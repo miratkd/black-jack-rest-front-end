@@ -28,19 +28,20 @@
             <div v-else class="math-page-body-table-cards-row-container">
               <CardLoader class="math-page-body-table-cards-img" v-for="(card, idx) in math.dealer_hand" :key="idx" :card="card"/>
             </div>
+            <div v-if="math.dealer_hand.cards" class="math-page-body-table-cards-row-title" :style="specialColors(math.dealer_hand.total_point)">{{math.dealer_hand.total_point}}</div>
           </div>
           <div class="math-page-body-table-cards-row">
             <div class="math-page-body-table-cards-row-title">{{formatName($store.state.account.user.username)}}:</div>
             <div class="math-page-body-table-cards-row-container">
               <CardLoader class="math-page-body-table-cards-img" v-for="(card, idx) in math.player_hand.cards" :key="idx" :card="card"/>
             </div>
-            <div class="math-page-body-table-cards-row-title" :style="specialColors()">{{math.player_hand.total_point}}</div>
+            <div class="math-page-body-table-cards-row-title" :style="specialColors(math.player_hand.total_point)">{{math.player_hand.total_point}}</div>
           </div>
         </div>
         <div class="math-page-body-table-buttons">
           <div class="math-page-body-table-button" v-on:click="drawCard()">Sacar carta</div>
           <div class="math-page-body-table-button" v-on:click="hold()">Manter mao</div>
-          <div class="math-page-body-table-button" v-on:click="nextRound()">Proximo round</div>
+          <div class="math-page-body-table-button" :class="disabledNextRound()" v-on:click="nextRound()">Proximo round</div>
         </div>
       </div>
     </div>
@@ -60,6 +61,9 @@ export default {
     }
   },
   methods: {
+    disabledNextRound () {
+      if (!this.math.dealer_hand.cards && this.math.player_hand.total_point <= 21) return 'disabledButton'
+    },
     hold () {
       this.$store.state.isLoading = true
       const url = this.$store.state.backEndUrl + 'math/' + localStorage.getItem('activeMath') + '/hold/'
@@ -72,6 +76,7 @@ export default {
       })
     },
     nextRound () {
+      if (!this.math.dealer_hand.cards && this.math.player_hand.total_point <= 21) return
       this.$store.state.isLoading = true
       const url = this.$store.state.backEndUrl + 'math/' + localStorage.getItem('activeMath') + '/next_round/'
       const config = { headers: { Authorization: this.$store.state.accessToken } }
@@ -106,9 +111,9 @@ export default {
         }
       })
     },
-    specialColors () {
-      if (this.math.player_hand.total_point > 21) return 'color: red'
-      else if (this.math.player_hand.total_point === 21) return 'color: yellow'
+    specialColors (value) {
+      if (value > 21) return 'color: red'
+      else if (value === 21) return 'color: yellow'
     },
     formatName (name) {
       if (name.length > 9) return name.slice(0, 9) + '...'
@@ -238,9 +243,15 @@ export default {
   display: flex;
   flex: 1;
   overflow-x: auto;
+  max-width: 30vw;
 }
 .math-page-body-table-cards-img{
   height: 20vh;
   margin-left: 2vw;
+}
+.disabledButton{
+  cursor: default;
+  background-color: lightgray;
+  border: 2px solid gray;
 }
 </style>
