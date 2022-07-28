@@ -39,8 +39,8 @@
           </div>
         </div>
         <div class="math-page-body-table-buttons">
-          <div class="math-page-body-table-button" v-on:click="drawCard()">Sacar carta</div>
-          <div class="math-page-body-table-button" v-on:click="hold()">Manter mao</div>
+          <div class="math-page-body-table-button" :class="disabledDraw()" v-on:click="drawCard()">Sacar carta</div>
+          <div class="math-page-body-table-button" :class="disabledHold()" v-on:click="hold()">Manter mao</div>
           <div class="math-page-body-table-button" :class="disabledNextRound()" v-on:click="nextRound()">Proximo round</div>
         </div>
       </div>
@@ -61,10 +61,17 @@ export default {
     }
   },
   methods: {
+    disabledDraw () {
+      if (this.math.dealer_hand.cards || this.math.player_hand.total_point > 21) return 'disabledButton'
+    },
+    disabledHold () {
+      if (this.math.dealer_hand.cards || this.math.player_hand.total_point > 21) return 'disabledButton'
+    },
     disabledNextRound () {
       if (!this.math.dealer_hand.cards && this.math.player_hand.total_point <= 21) return 'disabledButton'
     },
     hold () {
+      if (this.math.dealer_hand.cards || this.math.player_hand.total_point > 21) return
       this.$store.state.isLoading = true
       const url = this.$store.state.backEndUrl + 'math/' + localStorage.getItem('activeMath') + '/hold/'
       const config = { headers: { Authorization: this.$store.state.accessToken } }
@@ -93,6 +100,7 @@ export default {
       })
     },
     drawCard () {
+      if (this.math.dealer_hand.cards || this.math.player_hand.total_point > 21) return
       this.$store.state.isLoading = true
       const url = this.$store.state.backEndUrl + 'math/' + localStorage.getItem('activeMath') + '/draw_card/'
       const config = { headers: { Authorization: this.$store.state.accessToken } }
