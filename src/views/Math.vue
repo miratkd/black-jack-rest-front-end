@@ -45,19 +45,24 @@
         </div>
       </div>
     </div>
+    <MathResult v-if="mathIsOver" :isWin="isWin" :prize="math.prize" />
   </div>
 </template>
 
 <script>
 import CardLoader from '@/components/CardLoader.vue'
+import MathResult from '@/components/MathResult.vue'
 export default {
   name: 'Math',
   components: {
-    CardLoader
+    CardLoader,
+    MathResult
   },
   data () {
     return {
-      math: {}
+      math: {},
+      mathIsOver: false,
+      isWin: undefined
     }
   },
   methods: {
@@ -89,8 +94,17 @@ export default {
       const config = { headers: { Authorization: this.$store.state.accessToken } }
       const data = {}
       this.$store.state.axios.put(url, data, config).then(response => {
-        this.math = response.data
-        this.$store.state.isLoading = false
+        if (response.data.math_is_over) {
+          this.mathIsOver = true
+          if (response.data.message === 'Sorry, you lose the math.') this.isWin = false
+          else this.isWin = true
+          this.math = response.data.math
+          this.$store.state.toast.success(response.data.message)
+          this.$store.state.isLoading = false
+        } else {
+          this.math = response.data
+          this.$store.state.isLoading = false
+        }
       }).catch(error => {
         if (error.response.status === 401 && error.response.data === 'you need a token for this endpoint') {
           this.$store.dispatch('refreshToken').then(() => {
