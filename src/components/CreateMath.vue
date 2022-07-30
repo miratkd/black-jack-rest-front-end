@@ -23,6 +23,10 @@ export default {
   },
   methods: {
     createMath () {
+      if (!this.bet) {
+        this.$store.state.toast.error('Por favor, insira o valor que deseja apostar.')
+        return
+      }
       this.$store.state.isLoading = true
       const url = this.$store.state.backEndUrl + 'math/'
       const config = { headers: { Authorization: this.$store.state.accessToken } }
