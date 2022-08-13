@@ -18,7 +18,10 @@ export default {
   props: ['isWin', 'prize'],
   methods: {
     getWinBorder () { if (this.isWin) return 'border: 3px solid yellow' },
-    closeMath () { this.$router.push('/') }
+    closeMath () {
+      localStorage.removeItem('activeMath')
+      this.$router.push('/')
+    }
   }
 }
 </script>
