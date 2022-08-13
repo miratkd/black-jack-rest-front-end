@@ -100,7 +100,6 @@ export default {
           if (response.data.message === 'Sorry, you lose the math.') this.isWin = false
           else this.isWin = true
           this.math = response.data.math
-          this.$store.state.toast.success(response.data.message)
           this.$store.state.isLoading = false
         } else {
           this.math = response.data

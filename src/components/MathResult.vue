@@ -75,4 +75,16 @@ export default {
   margin-top: 2vh;
   cursor: pointer;
 }
+@media only screen and (max-width: 700px) {
+  .page-content{
+    padding: 4vh 1vw;
+    width: 80vw;
+  }
+  .modal-container{font-size: 3vw;}
+  .modal-text{text-align: center;}
+  .close-modal-button{
+    width: 70%;
+    padding: 1.5vh 0;
+  }
+}
 </style>
