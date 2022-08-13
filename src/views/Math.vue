@@ -5,7 +5,7 @@
       <div class="math-page-header-button">Round: {{math.math_active_round}}</div>
     </div>
     <div class="math-page-body">
-      <div>
+      <div class="math-mobile-flex">
         <div class="math-page-body-score-container">
           <div>
             <div :title="$store.state.account.user.username" class="math-page-body-score-text math-page-body-score-name">{{formatName($store.state.account.user.username)}}</div>
@@ -267,7 +267,6 @@ export default {
   display: flex;
   flex: 1;
   overflow-x: auto;
-  max-width: 30vw;
 }
 .math-page-body-table-cards-img{
   height: 20vh;
@@ -278,4 +277,46 @@ export default {
   background-color: lightgray;
   border: 2px solid gray;
 }
+@media only screen and (max-width: 700px) {
+  .math-page-header{
+    flex-direction: column;
+    gap: 2vh;
+  }
+  .math-page-header-button{width: 100%; padding: 2vw 0;}
+  .math-page-body{flex-direction: column;}
+  .math-mobile-flex{
+    display: flex;
+    justify-content: space-between;
+  }
+  .math-page-body-back{
+    margin-top: 0;
+    padding: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45%;
+    font-size: 3.5em;
+  }
+  .math-page-body-score-container{
+    width: 45%;
+    padding: 1vh 0;
+  }
+  .math-page-body-table{
+    margin-left: 0;
+    margin-top: 2vh;
+  }
+  .math-page{
+    font-size: 1.5vw;
+  }
+  .math-page-body-table-button{font-size: 2em;}
+}
+@media only screen and (max-width: 450px) {
+  .math-page-body-table-button{padding: 2vh 1vw; border: 1px solid lightsalmon;}
+  .math-page-header-button{padding: 3vh 0; border: 1px solid lightsalmon;}
+  .math-page{padding: 2vh 2vw; font-size: 2.5vw;}
+  .math-page-body-table-cards-row-title{font-size: 3em;}
+  .math-page-body-back{border: 1px solid lightsalmon;}
+  .math-page-body-score-container{border: 1px solid lightsalmon;}
+}
+
 </style>
