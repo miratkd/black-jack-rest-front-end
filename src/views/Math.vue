@@ -83,7 +83,8 @@ export default {
       const data = {}
       this.$store.state.axios.put(url, data, config).then(response => {
         this.math = response.data.math
-        this.$store.state.toast.success(response.data.message)
+        if (response.data.message === 'Congratulations, you won this round!') this.$store.state.toast.success('Parabens! você ganhou esse round.')
+        else this.$store.state.toast.error('Desculpe! você perdeu esse round.')
         this.$store.state.isLoading = false
       })
     },
@@ -121,6 +122,7 @@ export default {
       const data = {}
       this.$store.state.axios.put(url, data, config).then(response => {
         this.math = response.data
+        if (response.data.player_hand.total_point > 21) this.$store.state.toast.error('Desculpe, você estourou.')
         this.$store.state.isLoading = false
       }).catch(error => {
         if (error.response.status === 401 && error.response.data === 'you need a token for this endpoint') {
