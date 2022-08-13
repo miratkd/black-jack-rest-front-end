@@ -313,9 +313,22 @@ export default {
   .math-page-body-table-button{padding: 2vh 1vw; border: 1px solid lightsalmon;}
   .math-page-header-button{padding: 3vh 0; border: 1px solid lightsalmon;}
   .math-page{padding: 2vh 2vw; font-size: 2.5vw;}
-  .math-page-body-table-cards-row-title{font-size: 3em;}
+  .math-page-body-table-cards-row-title{
+    font-size: 3em;
+  }
   .math-page-body-back{border: 1px solid lightsalmon;}
   .math-page-body-score-container{border: 1px solid lightsalmon;}
+  .math-page-body-table{flex-direction: column;}
+  .math-page-body-table-cards{
+    width: 100%;
+    gap: 2vh;
+    margin: 1.5vh 0;
+  }
+  .math-page-body-table-buttons{
+    gap: 2vh;
+    padding: 0 4vw;
+    margin-bottom: 4vh;
+  }
 }
 
 </style>
