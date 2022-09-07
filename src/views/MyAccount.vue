@@ -67,7 +67,7 @@ export default {
 <style scoped>
 .page-containear{
   display: flex;
-  min-height: 86.3vh;
+  min-height: inherit;
   font-size: 1vw;
 }
 .account-section-containear{

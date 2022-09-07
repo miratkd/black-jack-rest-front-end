@@ -52,7 +52,7 @@ export default {
     color: white;
     padding: 5vh 0;
     text-align: center;
-    width: 35%;
+    width: 40%;
     border-radius: 10px;
     cursor: pointer;
     font-size: 4em;

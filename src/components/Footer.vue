@@ -25,40 +25,40 @@ export default {
 <style scoped>
 .site-footer{
   background-color: lightseagreen;
-  min-height: 7vh;
+  height: 7.5vh;
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  padding-left: 20px;
+  padding-left: 2vw;
+  overflow-y: hidden;
+  font-size: 1vw;
 }
 .site-footer-text{
   color: white;
-  font-size: 30px;
+  font-size: 2.2em;
 }
 .site-footer-link-text{
   color: white;
-  font-size: 23px;
+  font-size: 1.9em;
 }
 .site-footer-madeby{
-  margin-right: 30px;
+  margin-right: 2vw;
 }
 .site-footer-links{
-  margin-right: 30px;
+  margin-right: 2vw;
   display: flex;
   flex-direction: column;
 }
 .site-footer-link-icon{
-  height: 20px;
-  margin-right: 10px;
+  height: 2vh;
+  margin-right: 1vw;
   filter: invert(100%) sepia(0%) saturate(7474%) hue-rotate(124deg) brightness(110%) contrast(106%);
 }
 .site-footer-link-row{
   display: flex;
   align-items: center;
 }
-@media only screen and (max-width: 730px) {
-  .site-footer-text{
-    font-size: 25px;
-  }
-}
+@media only screen and (max-width: 730px) {.site-footer{font-size: 1.5vw;}}
+@media only screen and (max-width: 450px) {.site-footer{font-size: 2vw;}}
+@media only screen and (max-width: 370px) {.site-footer{font-size: 2.5vw;}}
 </style>

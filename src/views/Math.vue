@@ -8,7 +8,7 @@
       <div class="math-mobile-flex">
         <div class="math-page-body-score-container">
           <div>
-            <div :title="$store.state.account.user.username" class="math-page-body-score-text math-page-body-score-name">{{formatName($store.state.account.user.username)}}</div>
+            <div :title="$store.state.account.user.username" class="math-page-body-score-text math-page-body-score-name name-format">{{$store.state.account.user.username}}</div>
             <div class="math-page-body-score-text math-page-body-score-value">{{math.rounds_won}}</div>
           </div>
           <div>
@@ -16,24 +16,28 @@
             <div class="math-page-body-score-text math-page-body-score-value">{{getHouseRounds(math)}}</div>
           </div>
         </div>
-        <div class="math-page-body-back">Voltar</div>
+        <div class="math-page-body-back" v-on:click="goBack()">Voltar</div>
       </div>
       <div class="math-page-body-table">
         <div class="math-page-body-table-cards">
           <div class="math-page-body-table-cards-row">
-            <div class="math-page-body-table-cards-row-title">casa:</div>
-            <div v-if="math.dealer_hand.cards" class="math-page-body-table-cards-row-container">
-              <CardLoader class="math-page-body-table-cards-img" v-for="(card, idx) in math.dealer_hand.cards" :key="idx" :card="card"/>
-            </div>
-            <div v-else class="math-page-body-table-cards-row-container">
-              <CardLoader class="math-page-body-table-cards-img" v-for="(card, idx) in math.dealer_hand" :key="idx" :card="card"/>
+            <div>
+              <div class="math-page-body-table-cards-row-title">casa:</div>
+              <div v-if="math.dealer_hand.cards" class="math-page-body-table-cards-row-container">
+                <CardLoader class="math-page-body-table-cards-img" v-for="(card, idx) in math.dealer_hand.cards" :key="idx" :card="card"/>
+              </div>
+              <div v-else class="math-page-body-table-cards-row-container">
+                <CardLoader class="math-page-body-table-cards-img" v-for="(card, idx) in math.dealer_hand" :key="idx" :card="card"/>
+              </div>
             </div>
             <div v-if="math.dealer_hand.cards" class="math-page-body-table-cards-row-title" :style="specialColors(math.dealer_hand.total_point)">{{math.dealer_hand.total_point}}</div>
           </div>
           <div class="math-page-body-table-cards-row">
-            <div class="math-page-body-table-cards-row-title">{{formatName($store.state.account.user.username)}}:</div>
-            <div class="math-page-body-table-cards-row-container">
-              <CardLoader class="math-page-body-table-cards-img" v-for="(card, idx) in math.player_hand.cards" :key="idx" :card="card"/>
+            <div>
+              <div class="math-page-body-table-cards-row-title text-format">{{$store.state.account.user.username}}:</div>
+              <div class="math-page-body-table-cards-row-container">
+                <CardLoader class="math-page-body-table-cards-img" v-for="(card, idx) in math.player_hand.cards" :key="idx" :card="card"/>
+              </div>
             </div>
             <div class="math-page-body-table-cards-row-title" :style="specialColors(math.player_hand.total_point)">{{math.player_hand.total_point}}</div>
           </div>
@@ -66,6 +70,7 @@ export default {
     }
   },
   methods: {
+    goBack () { this.$router.push('/') },
     disabledDraw () {
       if (this.math.dealer_hand.cards || this.math.player_hand.total_point > 21) return 'disabledButton'
     },
@@ -137,10 +142,6 @@ export default {
     specialColors (value) {
       if (value > 21) return 'color: red'
       else if (value === 21) return 'color: yellow'
-    },
-    formatName (name) {
-      if (name.length > 9) return name.slice(0, 9) + '...'
-      return name
     },
     getMath () {
       const url = this.$store.state.backEndUrl + 'math/' + localStorage.getItem('activeMath') + '/'
@@ -262,10 +263,21 @@ export default {
   font-size: 2.5em;
   margin-left: 2vw;
 }
+.text-format{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 35vw;
+}
+.name-format{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 16vw;
+}
 .math-page-body-table-cards-row-container{
   display: flex;
-  flex: 1;
+  width: 33vw;
   overflow-x: auto;
+  margin-left: 1vw;
 }
 .math-page-body-table-cards-img{
   height: 20vh;
@@ -287,6 +299,10 @@ export default {
     display: flex;
     justify-content: space-between;
   }
+  .name-format{
+    max-width: 27vw;
+  }
+  .math-page-body-table-cards-row-container{width: 52vw;}
   .math-page-body-back{
     margin-top: 0;
     padding: auto;
@@ -316,8 +332,9 @@ export default {
   .math-page-body-table-cards-row-title{
     font-size: 3em;
   }
+  .math-page-body-table-cards-row-container{width: 77vw;}
   .math-page-body-back{border: 1px solid lightsalmon;}
-  .math-page-body-score-container{border: 1px solid lightsalmon;}
+  .math-page-body-score-container{border: 1px solid lightsalmon; font-size: 1.5em;}
   .math-page-body-table{flex-direction: column;}
   .math-page-body-table-cards{
     width: 100%;

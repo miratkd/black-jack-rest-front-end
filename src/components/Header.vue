@@ -3,7 +3,7 @@
     <div v-on:click="sendHome()" class="header-title">Black-Jack-Rest</div>
     <div v-if="$store.state.account" v-on:click="() => showMenu = !showMenu" class="header-title-user header-title">
       <span class="material-icons header-title-user-icon">account_circle</span>
-      <div>{{$store.state.account.user.username}}</div>
+      <div class="text-format">{{$store.state.account.user.username}}</div>
     </div>
     <div v-if="showMenu" class="account-menu-containear">
         <div class="account-menu-close">
@@ -48,10 +48,9 @@ export default {
     display: flex;
     align-items: center;
     background-color: lightseagreen;
-    padding: 10px;
     justify-content: space-between;
     font-size: 1vw;
-    min-height: 5vh;
+    height: 8vh;
   }
   .header-title{
     font-size: 3.1em;
@@ -64,9 +63,14 @@ export default {
     align-items: center;
   }
   .header-title-user-icon{
-    font-size: 1.3em;
-    margin-right: 30px;
+    font-size: 1.1em;
+    margin-right: 2vw;
   }
+  .text-format{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 35vw;
+}
   .account-menu-containear{
     position: absolute;
     top: 9vh;
@@ -101,7 +105,9 @@ export default {
 @media only screen and (max-width: 1000px) { .header-containear{ font-size: 1.5vw; } }
 @media only screen and (max-width: 800px) { .header-containear{ font-size: 1.75vw; } }
 @media only screen and (max-width: 650px) { .header-containear{ font-size: 2vw; } }
-@media only screen and (max-width: 500px) { .header-containear{ font-size: 2.25vw; } }
-@media only screen and (max-width: 300px) { .header-containear{ font-size: 2.75vw; } }
-@media only screen and (max-width: 200px) { .header-containear{ font-size: 3vw; } }
+@media only screen and (max-width: 300px) {
+  .header-containear{ font-size: 2.5vw; }
+  .text-format{ display: none; }
+}
+@media only screen and (max-width: 200px) { .header-containear{ font-size: 2.7vw; } }
 </style>

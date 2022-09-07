@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="edit-account">
     <div class="page-title">Edite sua conta.</div>
     <div class="page-input-row">
       <div class="page-input-text">Primeiro nome:</div>
@@ -93,17 +93,18 @@ export default {
 </script>
 
 <style scoped>
+.edit-account{font-size: 1vw;}
 .page-title{
-  padding-top: 10vh;
+  padding-top: 7vh;
   text-align: center;
-  font-size: 55px;
+  font-size: 3em;
   font-weight: 700;
 }
 .page-input-row{
   display: flex;
   align-items: center;
   margin-top: 5vh;
-  font-size: 35px;
+  font-size: 2em;
 }
 .page-input-text{
   flex: 1;
@@ -114,7 +115,7 @@ export default {
 }
 .page-input{
   width: 80%;
-  font-size: 30px;
+  font-size: 1em;
   border: 2px solid lightseagreen;
   border-radius: 5px;
   padding: 1vw;
@@ -131,31 +132,31 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-top: 150px;
-    margin-bottom: 50px;
+    margin-top: 10vh;
+    margin-bottom: 5vh;
   }
   .edit-account-form-cancel-button{
     border: 2px solid lightcoral;
     color: lightcoral;
     width: 20vw;
-    padding: 40px 0;
+    padding: 3vh 0;
     text-align: center;
     border-radius: 10px;
-    font-size: 40px;
+    font-size: 2.2em;
     cursor: pointer;
   }
   .edit-account-form-create-button{
     border: 2px solid lightseagreen;
     width: 20vw;
-    padding: 20px 0;
+    padding: 3vh 0;
     text-align: center;
     border-radius: 10px;
-    font-size: 40px;
+    font-size: 2.2em;
     cursor: pointer;
     margin-left: 10vw;
   }
   .page-email-error-message{
-    font-size: 20px;
+    font-size: 1.5em;
     color: lightcoral;
     text-align: center;
     margin-top: 0.5vh;
@@ -163,7 +164,7 @@ export default {
   .edit-account-form-delete-button{
     color: gray;
     cursor: pointer;
-    font-size: 80px;
+    font-size: 4em;
     margin-left: 4vw;
   }
   .edit-account-form-delete-button:hover{

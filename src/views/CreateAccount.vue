@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="create-account">
     <div class="create-account-title">
       Crie a sua conta.
     </div>
@@ -9,7 +9,7 @@
           Nome de usuario:
         </div>
         <input v-model="userName" class="create-account-form-input" :class="haveErrorInputBorder(userNameError)" type="text">
-        <div v-if="userNameError" class="error-color" style="margin-top: 10px">
+        <div v-if="userNameError" class="error-color" style="margin-top: 1vh">
           {{userNameError}}
         </div>
       </div>
@@ -18,7 +18,7 @@
           Email:
         </div>
         <input v-model="email" class="create-account-form-input" :class="haveErrorInputBorder(emailError)" type="text">
-        <div v-if="emailError" class="error-color" style="margin-top: 10px">
+        <div v-if="emailError" class="error-color" style="margin-top: 1vh">
           {{emailError}}
         </div>
       </div>
@@ -29,7 +29,7 @@
           Senha:
         </div>
         <input v-model="password" :class="haveErrorInputBorder(passwordError)" class="create-account-form-input" type="password">
-        <div v-if="passwordError" class="error-color" style="margin-top: 10px">
+        <div v-if="passwordError" class="error-color" style="margin-top: 1vh">
           {{passwordError}}
         </div>
       </div>
@@ -38,7 +38,7 @@
           Confirme a senha:
         </div>
         <input v-model="secondPassword" :class="haveErrorInputBorder(confirmPasswordError)" class="create-account-form-input" type="password">
-        <div v-if="confirmPasswordError" class="error-color" style="margin-top: 10px">
+        <div v-if="confirmPasswordError" class="error-color" style="margin-top: 1vh">
           {{confirmPasswordError}}
         </div>
       </div>
@@ -119,25 +119,26 @@ export default {
 </script>
 
 <style scoped>
+  .create-account{font-size: 1.3vw;}
   .create-account-title{
     text-align: center;
-    font-size: 55px;
-    padding-top: 50px;
+    font-size: 3em;
+    padding-top: 5vh;
   }
   .row{
     display: flex;
     justify-content: space-around;
   }
   .create-account-form-text{
-    font-size: 40px;
+    font-size: 2.5em;
   }
   .create-account-form-input{
-    margin-top: 10px;
+    margin-top: 2vh;
     border: none;
     border: 2px solid lightseagreen;
     border-radius: 5px;
-    font-size: 20px;
-    padding: 15px;
+    font-size: 2em;
+    padding: 1vw;
     color: lightseagreen;
     width: 100%;
   }
@@ -150,7 +151,7 @@ export default {
     align-items: flex-end;
   }
   .create-account-form-second-line{
-    margin-top: 30px;
+    margin-top: 3vh;
   }
   .create-account-form-colum{
     width: 30vw;
@@ -158,30 +159,33 @@ export default {
   .create-account-form-buttons-containear{
     display: flex;
     justify-content: center;
-    margin-top: 150px;
-    margin-bottom: 50px;
+    margin-top: 10vh;
+    margin-bottom: 5vh;
   }
   .create-account-form-cancel-button{
     border: 1px solid lightcoral;
     color: lightcoral;
     width: 20vw;
-    padding: 20px 0;
+    padding: 2vh 0;
     text-align: center;
     border-radius: 10px;
-    font-size: 40px;
+    font-size: 2.5em;
     cursor: pointer;
   }
   .create-account-form-create-button{
     border: 1px solid lightseagreen;
     width: 20vw;
-    padding: 20px 0;
+    padding: 2vh 0;
     text-align: center;
     border-radius: 10px;
-    font-size: 40px;
+    font-size: 2.5em;
     cursor: pointer;
     margin-left: 10vw;
   }
   @media only screen and (max-width: 1200px) {
+    .create-account{font-size: 2vw;}
+    .create-account-form-cancel-button{width: 35vw;}
+    .create-account-form-create-button{width: 35vw;}
     .row{
       flex-direction: column;
       align-items: center;
@@ -238,5 +242,8 @@ export default {
       margin: 20px 0 100px 0;
       padding: 15px 0;
     }
+  }
+  @media only screen and (max-width: 550px) {
+    .create-account{font-size: 3vw;}
   }
 </style>
