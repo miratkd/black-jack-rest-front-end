@@ -19,8 +19,14 @@ export default {
   methods: {
     getWinBorder () { if (this.isWin) return 'border: 3px solid yellow' },
     closeMath () {
+      this.$store.state.isLoading = true
       localStorage.removeItem('activeMath')
-      this.$router.push('/')
+      const config = { headers: { Authorization: this.$store.state.accessToken } }
+      this.$store.state.axios.get(this.$store.state.backEndUrl + 'account/me/', config).then(response => {
+        this.$store.commit('saveAccount', response.data)
+        this.$store.state.isLoading = false
+        this.$router.push('/')
+      })
     }
   }
 }

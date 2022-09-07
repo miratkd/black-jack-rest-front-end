@@ -36,12 +36,17 @@ export default {
       }
       this.$store.state.axios.post(url, data, config).then(response => {
         localStorage.setItem('activeMath', response.data.id)
+        const config = { headers: { Authorization: this.$store.state.accessToken } }
+        this.$store.state.axios.get(this.$store.state.backEndUrl + 'account/me/', config).then(response => this.$store.commit('saveAccount', response.data))
         this.$router.push('Math')
       }).catch(error => {
         if (error.response.status === 401 && error.response.data === 'you need a token for this endpoint') {
           this.$store.dispatch('refreshToken').then(() => {
             this.createMath()
           })
+        } else if (error.response.status === 400 && error.response.data.message === 'You doest have enough tickets for this actions') {
+          this.$store.state.toast.error('Desculpe, você não tem essa quantidade de tickets.')
+          this.$store.state.isLoading = false
         }
       })
     }
