@@ -3,12 +3,12 @@ import { useToast } from 'vue-toastification'
 
 export default createStore({
   state: {
-    backEndUrl: 'https://black-jack-rest.herokuapp.com/',
+    backEndUrl: 'https://web-production-0cf1.up.railway.app/',
     localBackEndUrl: 'http://127.0.0.1:8000/',
     account: undefined,
     isLoading: true,
-    clientId: '21SjlWa69gM7HdPpLGlQnHrPsmNXgxEMF1XWSRkM',
-    clientSecret: '2aQW0Wmbguj2XHHYGj8b6HNbRvP6VKn8L2NTx2h3mpGso03pMpiANK1pFRfYrWwNYQcHZHuXKTUvp4PIkHhr2eF10nVfEq76Ae9l4jfWbXKdJDSvZGrGtD3mgxqGmv40',
+    clientId: 'dOdNQw5sgki7t4boZQZQdztZQATQsYMo58QYbRxF',
+    clientSecret: 'CwHndWOtdXikU6RsLaaNeei1tKvuN3y9Arb2Htxxc9d15j31S7YPwXsDWP7Tn2bU6deh5RcascMqycIocFfw8KegeU9e7a9H46Gde7HWGIBIeELSNNCyANkw6rK2g8fu',
     accessToken: undefined,
     refreshToken: undefined,
     axios: require('axios'),
