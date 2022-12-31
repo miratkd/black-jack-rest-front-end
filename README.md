@@ -15,3 +15,31 @@ Cansado de ler sobre a aplicação? Perfeito, pois todo o site foi publicado na 
 
 Não tem tempo para testar todo o sistema? sem problema, aqui algumas imagens:
 
+
+![Home DeskTop](https://raw.githubusercontent.com/miratkd/black-jack-rest-front-end/main/src/assets/home-full.png)
+
+![Home Mobile](https://raw.githubusercontent.com/miratkd/black-jack-rest-front-end/main/src/assets/home-mobile.png)
+
+![Criar Conta](https://raw.githubusercontent.com/miratkd/black-jack-rest-front-end/main/src/assets/create-account.png)
+
+![Dashboard Desktop](https://raw.githubusercontent.com/miratkd/black-jack-rest-front-end/main/src/assets/dashbord-full.png)
+
+![Dashboard Mobile](https://raw.githubusercontent.com/miratkd/black-jack-rest-front-end/main/src/assets/dashboard-mobile.png)
+
+![Daily tickets](https://raw.githubusercontent.com/miratkd/black-jack-rest-front-end/main/src/assets/dailytickets.png)
+
+![Criar Partida](https://raw.githubusercontent.com/miratkd/black-jack-rest-front-end/main/src/assets/create-math.png)
+
+![Partida](https://raw.githubusercontent.com/miratkd/black-jack-rest-front-end/main/src/assets/math.png)
+
+![Partida Mobile](https://raw.githubusercontent.com/miratkd/black-jack-rest-front-end/main/src/assets/math-mobile.png)
+
+![Vitoria 1](https://raw.githubusercontent.com/miratkd/black-jack-rest-front-end/main/src/assets/win3.png)
+
+![Derrota 1](https://raw.githubusercontent.com/miratkd/black-jack-rest-front-end/main/src/assets/lose.png)
+
+![Vitoria 2](https://raw.githubusercontent.com/miratkd/black-jack-rest-front-end/main/src/assets/win4.png)
+
+![Derrota 2](https://raw.githubusercontent.com/miratkd/black-jack-rest-front-end/main/src/assets/lose2.png)
+
+![Vitoria 3](https://raw.githubusercontent.com/miratkd/black-jack-rest-front-end/main/src/assets/win-math.png)
